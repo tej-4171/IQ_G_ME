@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            height: 100px;
+            width: 100px;
+            padding: 2px;
+            margin: 2px;
+        }
+
+        img {
+            height: 96px;
+            width: 96px;
+        }
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dull background with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Make sure popup is above other elements */
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  width: 300px; /* Adjust width as needed */
+  text-align: center; /* Optional for centered content */
+}
+
+        h1{
+            color: rgb(24, 99, 34);
+        }
+    </style>
+</head>
+<style>
+
+</style>
+
+<body><center>
+    <h1 id="p">player1</h1><img src="tic-tac-toe_pic1.jpg" id="im">
+    <table border="1">
+        <tr>
+            <td onclick="func('1')" id="1"></td>
+            <td onclick="func('2')" id="2"></td>
+            <td onclick="func('3')" id="3"></td>
+        </tr>
+        <tr>
+            <td onclick="func('4')" id="4"></td>
+            <td onclick="func('5')" id="5"></td>
+            <td onclick="func('6')" id="6"></td>
+        </tr>
+        <tr>
+            <td onclick="func('7')" id="7"></td>
+            <td onclick="func('8')" id="8"></td>
+            <td onclick="func('9')" id="9"></td>
+        </tr>
+    </table>
+    <div id="popup" class="popup hidden">
+        <div class="popup-card">
+            <h2>hurrey!</h2>
+            <p id="p1"></p>
+            <button id="close-popup" onclick="window.location.reload()">Close</button>
+          </div>
+      </div>
+   
+</center>
+</body>
+<script>
+
+    var arr = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var cnt = 0;
+    var f=0;
+
+    function func(id) {
+        cnt++;
+
+        var player = document.getElementById("p").innerText;
+        //console.log(typeof (id));
+        p1img = "<img  src='tic-tac-toe_pic1.jpg'>"
+        p2img = "<img  src='tic-tac-toe_pic2_1.jpg'>"
+        if (player === "player1") {
+            document.getElementById(id).innerHTML = p1img;
+            document.getElementById(id).onclick = null;
+            document.getElementById("p").innerText = "player2";
+            document.getElementById("im").src = "tic-tac-toe_pic2_1.jpg";
+            arr[parseInt(id) - 1] = 0;
+            check(arr);
+            
+        }
+        else {
+            document.getElementById(id).innerHTML = p2img;
+            document.getElementById(id).onclick = null;
+            document.getElementById("p").innerText = "player1";
+            document.getElementById("im").src = "tic-tac-toe_pic1.jpg";
+            arr[parseInt(id) - 1] = 1;
+            check(arr);
+
+        }
+
+        if(cnt=== 9 && f=== 0){
+            document.getElementById("p1").innerText = "Well played. Game Draw!";
+            popup.style.display = "block";
+        }
+    }
+
+    function check(arr) {
+        //console.log("sta");
+        //console.log(arr[0] + "" + arr[1] + "" + arr[2]);
+        if (arr[0] === arr[1] && arr[1] === arr[2]) {
+            msg("player" + (arr[0] + 1) + " won");
+        }
+        else if (arr[3] === arr[4] && arr[4] === arr[5]) {
+            msg("player" + (arr[3] + 1) + " won");
+        }
+        else if (arr[6] === arr[7] && arr[7] === arr[8]) {
+            msg("player" + (arr[6] + 1) + " won");
+        }
+        else if (arr[0] === arr[3] && arr[3] === arr[6]) {
+            msg("player" + (arr[0] + 1) + " won");
+        }
+        else if (arr[1] === arr[4] && arr[4] === arr[7]) {
+            msg("player" + (arr[1] + 1) + " won");
+        }
+        else if (arr[2] === arr[5] && arr[5] === arr[8]) {
+            msg("player" + (arr[2] + 1) + " won");
+        }
+        else if (arr[0] === arr[4] && arr[4] === arr[8]) {
+            msg("player" + (arr[0] + 1) + " won");
+        }
+        else if (arr[2] === arr[4] && arr[4] === arr[6]) {
+            msg("player" + (arr[2] + 1) + " won");
+        }
+    }
+
+    function msg(st) {
+        f=1;
+        document.getElementById("p1").innerText = st;
+        popup.style.display = "block";
+        //console.log(st);
+    }
+
+</script>
+
+</html>
